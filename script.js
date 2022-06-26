@@ -85,3 +85,17 @@ console.log(arr.slice(-1));
 // SPLICE method
 console.log(arr.splice(1));
 console.log(arr);
+
+// REVERSE 
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse());
+console.log(arr2);
+
+
+// CONCAT 
+const letters = arr.concat(arr2);
+console.log(letters);
+console.log([...arr, ...arr2]);
+
+// JOIN
+console.log(letters.join('-'));
