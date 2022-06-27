@@ -6,28 +6,28 @@
 
 // Data
 const account1 = {
-  owner: 'Jonas Schmedtmann',
+  owner: 'Nokibul Alam',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
 };
 
 const account2 = {
-  owner: 'Jessica Davis',
+  owner: 'Jannate Dil Afroj',
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
 };
 
 const account3 = {
-  owner: 'Steven Thomas Williams',
+  owner: 'Istiak Himel',
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
 };
 
 const account4 = {
-  owner: 'Sarah Smith',
+  owner: 'Nafis Al Moin',
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
@@ -61,61 +61,18 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-/////////////////////////////////////////////////
-
-// SLICE method
-let arr = ['a', 'b', 'c', 'd', 'e'];
-console.log(arr.slice(2));
-console.log(arr.slice(-2));
-console.log(arr.slice(1, 4));
-console.log(arr.slice(-1));
-
-// SPLICE method
-console.log(arr.splice(1));
-console.log(arr);
-
-// REVERSE 
-const arr2 = ['j', 'i', 'h', 'g', 'f'];
-console.log(arr2.reverse());
-console.log(arr2);
-
-
-// CONCAT 
-const letters = arr.concat(arr2);
-console.log(letters);
-console.log([...arr, ...arr2]);
-
-// JOIN
-console.log(letters.join('-'));
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-for(const [i, movement] of movements.entries()) {
-  if(movement > 0) console.log(`Movement ${i + 1}: You deposited ${movement}`);
-  else console.log(`Movement ${i + 1}: You withdrew ${movement}`)
-}
-
-/*
-There is no way we can BREAK or CONTINUE ForEach Loop
- */
-movements.forEach(function(mov, i, arr){
-  if(mov > 0) console.log(`Movement ${i + 1}: You deposited ${mov}`);
-  else console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
-});
-
-// 0: function(200)
-// 1: function(450)
-// 2: function(400)
-// ...
+const displayMovements = function(movements) {
+  containerMovements.innerHTML = '';
+  // .textContent = 0;
+  movements.forEach(function(mov, i){
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+        <div class="movements__value">${mov}</div>
+      </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+displayMovements(account1.movements);
