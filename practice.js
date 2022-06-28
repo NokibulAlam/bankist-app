@@ -99,6 +99,8 @@
 
 // checkDogs(dogsJulia, dogsKate);
 
+
+
 /************* Map Method **************/
 
 // MAP method return a new array with new eliments
@@ -111,6 +113,11 @@ const movementsUsd = movements.map(function(mov) {
   return mov * euroToUsd;
 });
 
+// /* Arrow Function */ 
+// const movementsUsd = movements.map(mov => 
+//    mov * euroToUsd
+// );
+
 console.log(movements);
 console.log(movementsUsd);
 
@@ -119,3 +126,15 @@ for (const mov of movements) {
   movementsUsdFor.push(mov * euroToUsd);
 }
 console.log(movementsUsdFor);
+
+/* Arrow Function */ 
+const movDes = movements.map((mov, i) => 
+// {
+  `Movement ${i + 1}: You ${mov > 0 ? 'deposite' : 'withdraw'} ${Math.abs(mov)}`
+
+  // if(mov > 0) return`Movement ${i + 1}: Deposite ${mov}`;
+  // else return `Movement ${i + 1}: withdraw ${Math.abs(mov)}`;
+// }
+);
+
+console.log(movDes);
