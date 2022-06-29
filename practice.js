@@ -11,9 +11,9 @@
 
 // const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-/////////////////////////////////////////////////
+///////////////////////////////////////////////
 
-SLICE method
+// SLICE method
 let arr = ['a', 'b', 'c', 'd', 'e'];
 console.log(arr.slice(2));
 console.log(arr.slice(-2));
@@ -40,7 +40,7 @@ console.log(letters.join('-'));
 
 // /************* forOf and forEach Loop **************/
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 for(const [i, movement] of movements.entries()) {
   if(movement > 0) console.log(`Movement ${i + 1}: You deposited ${movement}`);
@@ -105,7 +105,7 @@ checkDogs(dogsJulia, dogsKate);
 
 // MAP method return a new array with new eliments
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const euroToUsd = 1.1;
 
@@ -143,7 +143,7 @@ console.log(movDes);
 
 /************* FILTER METHOD **************/
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const dep = movements.filter(function(mov) {
   return mov > 0;
@@ -156,3 +156,21 @@ console.log(deposit);
 
 const withdrawal = movements.filter(mov => mov < 0);
 console.log(withdrawal);
+
+
+/************* REDUCE METHOD **************/
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log(movements);
+
+const balance = movements.reduce(function(acc, cur,i){
+  console.log(`Iteration ${i}: ${acc}`);
+  return acc + cur;
+}, 0);
+
+/* Arrow Function */ 
+const balnc = movements.reduce((accu, curn) => accu + curn, 0);
+
+console.log(balnc);
+
+console.log(balance);
