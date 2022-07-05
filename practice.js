@@ -249,3 +249,15 @@ const owner = [];
 for(const [name, key] of accounts.entries(accounts)) {
   if(key.owner === 'Nokibul Alam') console.log(key);
 }
+
+
+/*************** SOME & EVERY METHOD ****************/
+
+console.log(movements);
+
+// Equality
+console.log(movements.includes(-130));
+
+// CONDITION
+const anyDeposits = movements.some(mov => mov > 0);
+console.log(anyDeposits);

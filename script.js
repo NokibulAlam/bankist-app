@@ -4,6 +4,9 @@
 /////////////////////////////////////////////////
 // BANKIST APP
 
+// EVERY METHOD
+
+
 // Data
 const account1 = {
   owner: 'Nokibul Alam',
@@ -170,7 +173,6 @@ btnTransfer.addEventListener('click', function(e) {
 btnClose.addEventListener('click', function(e) {
   e.preventDefault();
   
-  
   if(inputCloseUsername.value === currentAccount.username && Number(inputClosePin.value) === currentAccount.pin) {
     // Finding the matched account INDEX
     const index = accounts.findIndex(account => account.username === currentAccount.username);
@@ -183,4 +185,20 @@ btnClose.addEventListener('click', function(e) {
   }
 
   inputCloseUsername.value =  inputClosePin.value = '';
+});
+
+btnLoan.addEventListener('click', function(e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  // If Any Deposit is 10% than the requested loan amount
+  if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * .01)) {
+    // Add Movements
+    currentAccount.movements.push(amount);
+
+    // Update UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
 });
