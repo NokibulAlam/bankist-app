@@ -270,3 +270,35 @@ const deposit2 = mov => mov > 0;
 console.log(movements.every(deposit));
 console.log(movements.some(deposit));
 console.log(movements.filter(deposit));
+
+
+/*************** FLAT & FLATMAP ****************/
+const n = [[1, 2, 3], 4, 5, [6, 7, 8], 9];
+console.log(n.flat());
+
+const arrDeep = [[1, 2, [3, 4], 5], 6, 7, [8, 9]];
+console.log(arrDeep.flat(2));
+
+
+/*************** Sorting Arrays ****************/
+
+const owners = ['Nokibul', 'Himel', 'Afroje', 'Nafis'];
+console.log(owners.sort());
+
+// Numbers
+
+// Ascending Order
+// movements.sort((a, b) => {
+//   if(a > b) return 1;
+//   if(a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Descending order
+// movements.sort((a, b) => {
+//   if(a > b) return -1;
+//   if(a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
