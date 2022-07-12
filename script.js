@@ -207,8 +207,8 @@ btnLoan.addEventListener('click', function(e) {
 });
 
 /* Sorted Variable for making sort TRUE or FALSE */
-
 let sorted = false;
+
 btnSort.addEventListener('click', function(e) {
   e.preventDefault();
   displayMovements(currentAccount.movements, !sorted);
