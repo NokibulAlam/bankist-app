@@ -216,4 +216,21 @@ btnSort.addEventListener('click', function(e) {
 });
 
 
+// 1.
+/* Same Work */
+// const bankDepositSum = accounts.map(acc => acc.movements).flat();
+const bankDepositSum = accounts.flatMap(acc => acc.movements).filter(mov => mov > 0).reduce((sum, cur) => sum + cur, 0);
+console.log(bankDepositSum);
 
+// 2.
+// const numDeposit1000 = accounts.flatMap(acc => acc.movements).filter(mov => mov > 1000).length;
+const numDeposit1000 = accounts.flatMap(acc => acc.movements).reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+console.log(numDeposit1000);
+
+// Reduced ++ prefix
+let a = 10;
+console.log(++a);
+console.log(a);
+
+const numWithdraw1000 = accounts.flatMap(acc => acc < 1000).reduce((count, cur) => (cur < 1000 ? ++count : count), 0);
+console.log(numWithdraw1000);
