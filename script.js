@@ -339,3 +339,57 @@ console.log(+(2.7).toFixed(1));
 //////////////////**********************The Reminder Operator******************////////////////////
 
 console.log(5 % 2);
+
+const isEven = n => n % 2 === 0;
+
+console.log(isEven(2));
+console.log(isEven(5));
+console.log(isEven(514));
+
+
+labelBalance.addEventListener('click', function(){
+  [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
+    if (i % 2 === 0) row.style.backgroundColor = 'blue';
+  });
+});
+
+
+//////////////////**********************Working with BigInt******************////////////////////
+
+console.log(4315487451798421544894512144989412n);
+console.log(BigInt(54985497987));
+
+
+// Operations
+console.log(10000n + 10000n);
+console.log(3245323435565231389685973n * 1000000n);
+
+const huge = 203894964008487986098n;
+const num = 23;
+console.log(huge * BigInt(num));
+
+// Exceptions
+console.log(20n > 15);
+console.log(20n === 20);
+console.log(typeof 20n);
+console.log(20n == '20');
+
+
+// Divisions
+
+console.log(10n / 3n);
+console.log(10n / 3n);
+
+
+//////////////////**********************Creating Dates******************////////////////////
+
+// Create a Date
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Tue Aug 16 2022 13:19:26'));
+console.log(new Date('December 31, 2021'));
+console.log(account1.movementsDates[0]);
+
+console.log(new Date(2037, 10, 19, 23, 57, 5));
+console.log(new Date(2037, 10, 33)); 
