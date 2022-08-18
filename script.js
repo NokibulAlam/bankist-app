@@ -107,18 +107,27 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 
-const displayMovements = function(movements, sort = false) {
+const displayMovements = function(account, sort = false) {
   containerMovements.innerHTML = '';
   // .textContent = 0;
 
   // Sorting the movements with a copy of a Movements array
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort ? account.movements.slice().sort((a, b) => a - b) : account.movements;
   
   movs.forEach(function(mov, i){
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const date = new Date(account.movementsDates[i]);
+    const day = `${date.getDate()}`.padStart(2, 0);
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+
+    const displayDate = `${day}/${month}/${year}`;
+
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+        <div class="movements__date">${displayDate}</div>
         <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
@@ -163,7 +172,7 @@ createUsernames(accounts);
 
 const updateUI = function(account) {
   // Display movments
-  displayMovements(account.movements);
+  displayMovements(account);
       
   // Display Balance
   calcDisplayBalance(account);
@@ -174,6 +183,14 @@ const updateUI = function(account) {
 
 // Event Handler
 let currentAccount;
+
+
+// FAKE ALWAYS LOGIN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
+
+
 btnLogin.addEventListener('click', function(e) {
   e.preventDefault();
   currentAccount = accounts.find(acc =>
@@ -186,6 +203,16 @@ btnLogin.addEventListener('click', function(e) {
       // Display UI and message
       labelWelcome.textContent = `Welcome Back, ${currentAccount.owner.split(' ')[0]}`;
       containerApp.style.opacity = 100;
+
+      // Create current date & time
+      const now = new Date();
+      const day = `${now.getDate()}`.padStart(2, 0);
+      const month = `${now.getMonth() + 1}`.padStart(2, 0);
+      const year = now.getFullYear();
+      const hours = `${now.getHours()}`.padStart(2, 0);
+      const min =` ${now.getMinutes()}`.padStart(2, 0);
+
+      labelDate.textContent = `${day}/${month}/${year}, ${hours}:${min}`;
 
       // Clear Input field
       inputLoginUsername.value =  inputLoginPin.value = '';
@@ -210,6 +237,10 @@ btnTransfer.addEventListener('click', function(e) {
       // Doing the Transfer
       currentAccount.movements.push(-amount);
       reciverAccount.movements.push(amount);
+
+      // Add Transfer Date
+      currentAccount.movementsDates.push(new Date().toISOString());
+      reciverAccount.movementsDates.push(new Date().toISOString());
 
       // Update UI
       updateUI(currentAccount);
@@ -243,6 +274,9 @@ btnLoan.addEventListener('click', function(e) {
     // Add Movements
     currentAccount.movements.push(amount);
 
+    // Add Transfer Date
+    currentAccount.movementsDates.push(new Date().toISOString());
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -254,7 +288,7 @@ let sorted = false;
 
 btnSort.addEventListener('click', function(e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
 
@@ -392,4 +426,18 @@ console.log(new Date('December 31, 2021'));
 console.log(account1.movementsDates[0]);
 
 console.log(new Date(2037, 10, 19, 23, 57, 5));
-console.log(new Date(2037, 10, 33)); 
+console.log(new Date(2037, 10, 33));
+
+const future = new Date(2037, 7, 18, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getMonth().toString());
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+
+
+//////////////////**********************Operations With Dates******************////////////////////
