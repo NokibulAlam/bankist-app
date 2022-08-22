@@ -106,6 +106,7 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+
 const formatMovementDate = function(date, locale) {
   const countDays = (date1, date2) => Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
   const daysPassed = countDays(new Date(), date);
@@ -122,6 +123,7 @@ const formatMovementDate = function(date, locale) {
 
   return new Intl.DateTimeFormat(locale).format(date);
 }
+
 
 const formatCur = function(value, locale, currency) {
   return new Intl.NumberFormat(locale, {
@@ -191,6 +193,7 @@ const createUsernames = function(accs) {
 };
 createUsernames(accounts);
 
+
 const updateUI = function(account) {
   // Display movments
   displayMovements(account);
@@ -202,16 +205,36 @@ const updateUI = function(account) {
   calcDisplaySummary(account);
 }
 
+
+const setLogOutTimer = function() {
+  const tick = function() {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+     // In each caa, print the remaining time to UI
+     labelTimer.textContent = `${min}:${sec}`;
+
+     if(time === 0){
+      clearInterval(timer);
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
+
+    time--;
+  };
+
+  // Set time to 5 minutes
+  let time = 30;
+
+  // Call the timer every second
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+}
+
+
 // Event Handler
-let currentAccount;
-
-// FAKE ALWAYS LOGIN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
-
-
-// Experimenting INTERNATIONAL API
+let currentAccount, timer;
 
 btnLogin.addEventListener('click', function(e) {
   e.preventDefault();
@@ -248,6 +271,8 @@ btnLogin.addEventListener('click', function(e) {
 
       // labelDate.textContent = `${day}/${month}/${year}, ${hours}:${min}`;
 
+      if(timer) clearInterval(timer);
+      timer = setLogOutTimer();
 
       // Clear Input field
       inputLoginUsername.value =  inputLoginPin.value = '';
@@ -257,6 +282,8 @@ btnLogin.addEventListener('click', function(e) {
       updateUI(currentAccount);
     }
 });
+
+
 
 btnTransfer.addEventListener('click', function(e) {
   e.preventDefault();
@@ -282,6 +309,8 @@ btnTransfer.addEventListener('click', function(e) {
     }
 });
 
+
+
 btnClose.addEventListener('click', function(e) {
   e.preventDefault();
   
@@ -298,6 +327,8 @@ btnClose.addEventListener('click', function(e) {
 
   inputCloseUsername.value =  inputClosePin.value = '';
 });
+
+
 
 btnLoan.addEventListener('click', function(e) {
   e.preventDefault();
@@ -317,6 +348,8 @@ btnLoan.addEventListener('click', function(e) {
   }
   inputLoanAmount.value = '';
 });
+
+
 
 /* Sorted Variable for making sort TRUE or FALSE */
 let sorted = false;
@@ -496,5 +529,7 @@ console.log(navigator.language, new Intl.NumberFormat(navigator.language, option
 
 //////////////////********************** Timers_ setTimeout and setInterval ******************////////////////////
 
-setTimeout(() => console.log("Here is your Pizza"), 4000);
-console.log("Waiting");
+const ingredients = ['Sausage', 'Spinach'];
+const pizzaTimer = setTimeout((inc1, inc2) => console.log(`Here is your Pizza with ${inc1} and ${inc2}`), 4000, ...ingredients);
+console.log('Waiting...');
+if(ingredients.includes('Spinach')) clearTimeout(pizzaTimer);
